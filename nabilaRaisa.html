@@ -3,42 +3,61 @@
 <head>
 <title>Basic Javascript</title>
 <style>
-body{
-	background-color : #EAC9C1;
+body {
+	background-color: #f8f3e8;
+	margin: 0;
+	padding: 0;
 }
 
-button {
-	background-color : #FFD9DA;
-	padding: 15px;
-	border: dotted;
-	text-align: center;
-}
-button:hover {
-  background-color: #89023E;
-  color: white;
+h1, p, button {
+	font-family: Arial, sans-serif;
 }
 
-hr {
-  border-top: 1px dashed #A5402D;
-}
-
-p{
-	font-family: Papyrus;
-	color: #4C1036;
-}
-
-#container{
-	background-color: #4C1036;
+#container {
+	background-color: #e6f8f6;
 	width: 300px;
 	height: 300px;
 	position: relative;
+	margin: 50px auto;
 }
 
-#animate{
-	background-color: #A5402D;
+#animate {
+	background-color: #f8dbb8;
 	width: 50px;
 	height: 50px;
 	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+button {
+	background-color: #cde8e6;
+	padding: 10px 20px;
+	border: none;
+	cursor: pointer;
+	margin: 5px;
+}
+
+button:hover {
+	background-color: #f6c7b3;
+	color: white;
+}
+
+hr {
+	border-top: 1px dashed #5b96a9;
+}
+
+#coordinates {
+	color: #5b96a9;
+}
+
+.extra-animation {
+	background-color: #e6f8f6;
+	width: 50px;
+	height: 50px;
+	margin: 10px;
+	display: inline-block;
+	border-radius: 50%;
 }
 
 </style>
@@ -47,114 +66,114 @@ p{
 
 <center>
 <h1 style="color:#7D387D;">JavaScript Output Below</h1>
-<p id="demo">This will change with javascript</p>
-<button type="button" onclick="addition()">
-Add 6+5</button>
-<button type = "button" onclick="subtraction()">
-Subtract 6-5</button>
-<button type = "button" onclick="multiplication()">
-Multiply 6(5)</button>
-<button type = "button" onclick="division()">
-Divide 6/5</button>
-<button type ="button" onclick="helloworld()">
-Hello World</button>
+<p id="demo">This will change with JavaScript</p>
+<button type="button" onclick="addition()">Add 6+5</button>
+<button type="button" onclick="subtraction()">Subtract 6-5</button>
+<button type="button" onclick="multiplication()">Multiply 6(5)</button>
+<button type="button" onclick="division()">Divide 6/5</button>
+<button type="button" onclick="helloworld()">Hello World</button>
 
 <br>
 <hr>
 
 <div style="background-color:#CE796B; width:100px; height:100px;" onmousemove="moveFunk(event)" onmouseout="clearCoor()"></div>
+<p id="coordinates"></p>
 <br>
 <hr>
 <br>
 <br>
 
-<button type="button" onclick="moveIt()">moveIt</button>
-<button type = "button" onlick="moveUp"> moveUp</button>
+<button type="button" onclick="moveIt()">Move Right and Down</button>
+<button type="button" onclick="moveUp()">Move Up and Left</button>
 <div id="container">
-	<div id="animate">
-</div>
+	<div id="animate"></div>
 </div>
 
+<hr>
+<div class="extra-animation" id="extra1"></div>
+<div class="extra-animation" id="extra2"></div>
+<div class="extra-animation" id="extra3"></div>
 
 <script>
 
-function moveIt(){
-let id= null
-const elem = document.getElementById("animate")
-let pos = 0
-clearInterval(id)
-id = setInterval(frame,5)
-function frame(){
-if (pos == 250){
-clearInterval(id)
-}
-else{
-pos++
-elem.style.top = pos + "px"
-elem.style.left = pos + "px"
-}
-}
+function moveIt() {
+    const elem = document.getElementById("animate");
+    let pos = 0;
+    const id = setInterval(frame, 5);
+    
+    function frame() {
+        if (pos == 250) {
+            clearInterval(id);
+        } else {
+            pos++;
+            elem.style.top = pos + "px";
+            elem.style.left = pos + "px";
+        }
+    }
 }
 
-
-function moveUp(){
-let id= null
-const elem = document.getElementById("animate")
-let pos = 250
-clearInterval(id)
-id = setInterval(frame,5)
-function frame(){
-if (pos == 0){
-clearInterval(id)
-}
-else{
-pos--
-elem.style.bottom = pos + "px"
-elem.style.right = pos + "px"
-}
-}
+function moveUp() {
+    const elem = document.getElementById("animate");
+    let pos = 250;
+    const id = setInterval(frame, 5);
+    
+    function frame() {
+        if (pos == 0) {
+            clearInterval(id);
+        } else {
+            pos--;
+            elem.style.top = pos + "px";
+            elem.style.left = pos + "px";
+        }
+    }
 }
 
-
-
-
-
-
-
-
-function moveFunk (e){
-	let x = e.clientX
-	let y = e.clientY
-	let coor ="Coordinates: (" +x+", "+y+")"
-	document.getElementById("demo").innerHTML= coor
-}
-function clearCoor(){
-	document.getElementById("demo").innerHTML =  "   "
+function moveFunk(e) {
+    let x = e.clientX;
+    let y = e.clientY;
+    let coor = "Coordinates: (" + x + ", " + y + ")";
+    document.getElementById("coordinates").innerHTML = coor;
 }
 
+function clearCoor() {
+    document.getElementById("coordinates").innerHTML = "";
+}
 
+function addition() {
+    document.getElementById("demo").innerHTML = 6 + 5;
+}
 
-function addition(){
-document.getElementById("demo").innerHTML=6+5
+function subtraction() {
+    document.getElementById("demo").innerHTML = 6 - 5;
 }
-function subtraction(){
-document.getElementById("demo").innerHTML=6-5
+
+function multiplication() {
+    document.getElementById("demo").innerHTML = 6 * 5;
 }
-function multiplication(){
-document.getElementById("demo").innerHTML=6*5
+
+function division() {
+    document.getElementById("demo").innerHTML = 6 / 5;
 }
-function division(){
-document.getElementById("demo").innerHTML=6/5
+
+function helloworld() {
+    document.getElementById("demo").innerHTML = "Greetings Everyone!";
 }
-function helloworld(){
-document.getElementById("demo").innerHTML="Greetings Everyone!"
-}
+
+// Additional Animations
+document.getElementById("extra1").addEventListener("mouseover", function() {
+    this.style.transform = "rotate(360deg)";
+});
+
+document.getElementById("extra2").addEventListener("mouseover", function() {
+    this.style.transform = "scale(1.5)";
+});
+
+document.getElementById("extra3").addEventListener("mouseover", function() {
+    this.style.transform = "translate(50px, 50px)";
+});
 
 </script>
-
-
 
 </center>
 </body>
 </html>
-
