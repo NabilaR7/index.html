@@ -1,188 +1,233 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Basic Javascript</title>
-<style>
-body{
-	background-color : #EAC9C1;
-}
+    <title>Basic Javascript</title>
+    <style>
+        body {
+            background-image: url('https://source.unsplash.com/random/1920x1080/?nature');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
 
-button {
-	background-color : #FFD9DA;
-	padding: 15px;
-	border: dotted;
-	text-align: center;
-}
-button:hover {
-	background-color: #89023E;
-	color: white;
-}
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
 
-hr {
-	border-top: 1px dashed #A5402D;
-}
+        button {
+            background-color: #FFD9DA;
+            padding: 15px;
+            border: none;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
-p{
-	font-family: Papyrus;
-	color: #4C1036;
-}
+        button:hover {
+            background-color: #89023E;
+            color: white;
+        }
 
-#container{
-	background-color: #4C1036;
-	width: 300px;
-	height: 300px;
-	position: relative;
-}
+        hr {
+            border-top: 1px dashed #A5402D;
+        }
 
-#animate{
-	background-color: #A5402D;
-	width: 50px;
-	height: 50px;
-	position: absolute;
-}
+        p {
+            font-family: Papyrus, sans-serif;
+            color: #4C1036;
+        }
 
-#animate2{
-	background-color: #CA8787;
-	width: 50px;
-	height: 50px;
-	position: absolute;
-}
+        #container {
+            background-color: #4C1036;
+            width: 300px;
+            height: 300px;
+            position: relative;
+        }
 
-#animate3{
-	background-color: #A87676;
-	width: 50px;
-	height: 50px;
-	position: absolute;
-}
+        #animate, #animate2, #animate3 {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+        }
 
-</style>
+        #animate {
+            background-color: #A5402D;
+        }
+
+        #animate2 {
+            background-color: #CA8787;
+        }
+
+        #animate3 {
+            background-color: #A87676;
+        }
+
+        .animated {
+            animation-duration: 1s;
+            animation-fill-mode: both;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .fadeIn {
+            animation-name: fadeIn;
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+
+        .fadeOut {
+            animation-name: fadeOut;
+        }
+    </style>
 </head>
 <body>
+    <div class="container fadeIn animated">
+        <h1 style="color:#7D387D;">JavaScript Output Below</h1>
+        <p id="demo">This will change with JavaScript</p>
+        <button type="button" onclick="addition()">Add 6+5</button>
+        <button type="button" onclick="subtraction()">Subtract 6-5</button>
+        <button type="button" onclick="multiplication()">Multiply 6*5</button>
+        <button type="button" onclick="division()">Divide 6/5</button>
+        <button type="button" onclick="helloworld()">Hello World</button>
+        <br>
+        <hr>
+        <div style="background-color:#CE796B; width:100px; height:100px;" onmousemove="moveFunk(event)" onmouseout="clearCoor()"></div>
+        <br>
+        <hr>
+        <br>
+        <br>
+        <button type="button" onclick="moveIt()">Move It</button>
+        <button type="button" onclick="moveUp()">Move Up</button>
+        <div id="container">
+            <div id="animate"></div>
+        </div>
+        <button type="button" onclick="rotateIt()">Rotate It</button>
+        <div id="container">
+            <div id="animate2"></div>
+        </div>
+        <button type="button" onclick="changeSize()">Change Size</button>
+        <div id="container">
+            <div id="animate3"></div>
+        </div>
+        <button type="button" onclick="toggleFade()">Toggle Fade</button>
+    </div>
 
-<center>
-<h1 style="color:#7D387D;">JavaScript Output Below</h1>
-<p id="demo">This will change with JavaScript</p>
-<button type="button" onclick="addition()">Add 6+5</button>
-<button type="button" onclick="subtraction()">Subtract 6-5</button>
-<button type="button" onclick="multiplication()">Multiply 6*5</button>
-<button type="button" onclick="division()">Divide 6/5</button>
-<button type="button" onclick="helloworld()">Hello World</button>
+    <script>
+        function moveIt() {
+            let id = null;
+            const elem = document.getElementById("animate");
+            let pos = 0;
+            clearInterval(id);
+            id = setInterval(frame, 5);
 
-<br>
-<hr>
+            function frame() {
+                if (pos == 250) {
+                    clearInterval(id);
+                } else {
+                    pos++;
+                    elem.style.top = pos + "px";
+                    elem.style.left = pos + "px";
+                }
+            }
+        }
 
-<div style="background-color:#CE796B; width:100px; height:100px;" onmousemove="moveFunk(event)" onmouseout="clearCoor()"></div>
-<br>
-<hr>
-<br>
-<br>
+        function moveUp() {
+            let id = null;
+            const elem = document.getElementById("animate");
+            let pos = 250;
+            clearInterval(id);
+            id = setInterval(frame, 5);
 
-<button type="button" onclick="moveIt()">Move It</button>
-<button type="button" onclick="moveUp()">Move Up</button>
-<div id="container">
-	<div id="animate"></div>
-</div>
+            function frame() {
+                if (pos == 0) {
+                    clearInterval(id);
+                } else {
+                    pos--;
+                    elem.style.top = pos + "px";
+                    elem.style.left = pos + "px";
+                }
+            }
+        }
 
-<button type="button" onclick="rotateIt()">Rotate It</button>
-<div id="container">
-	<div id="animate2"></div>
-</div>
+        function rotateIt() {
+            const elem = document.getElementById("animate2");
+            let rotation = 0;
+            setInterval(() => {
+                rotation += 1;
+                elem.style.transform = "rotate(" + rotation + "deg)";
+            }, 20);
+        }
 
-<button type="button" onclick="changeSize()">Change Size</button>
-<div id="container">
-	<div id="animate3"></div>
-</div>
+        function changeSize() {
+            const elem = document.getElementById("animate3");
+            let size = 50;
+            setInterval(() => {
+                size = (size === 50) ? 100 : 50;
+                elem.style.width = size + "px";
+                elem.style.height = size + "px";
+            }, 1000);
+        }
 
-<script>
+        function moveFunk(e) {
+            let x = e.clientX;
+            let y = e.clientY;
+            let coor = "Coordinates: (" + x + ", " + y + ")";
+            document.getElementById("demo").innerHTML = coor;
+        }
 
-function moveIt(){
-	let id = null;
-	const elem = document.getElementById("animate");
-	let pos = 0;
-	clearInterval(id);
-	id = setInterval(frame, 5);
-	function frame(){
-		if (pos == 250){
-			clearInterval(id);
-		}
-		else{
-			pos++;
-			elem.style.top = pos + "px";
-			elem.style.left = pos + "px";
-		}
-	}
-}
+        function clearCoor() {
+            document.getElementById("demo").innerHTML = "";
+        }
 
-function moveUp(){
-	let id = null;
-	const elem = document.getElementById("animate");
-	let pos = 250;
-	clearInterval(id);
-	id = setInterval(frame, 5);
-	function frame(){
-		if (pos == 0){
-			clearInterval(id);
-		}
-		else{
-			pos--;
-			elem.style.top = pos + "px";
-			elem.style.left = pos + "px";
-		}
-	}
-}
+        function addition() {
+            document.getElementById("demo").innerHTML = 6 + 5;
+        }
 
-function rotateIt(){
-	const elem = document.getElementById("animate2");
-	let rotation = 0;
-	setInterval(() => {
-		rotation += 1;
-		elem.style.transform = "rotate(" + rotation + "deg)";
-	}, 20);
-}
+        function subtraction() {
+            document.getElementById("demo").innerHTML = 6 - 5;
+        }
 
-function changeSize(){
-	const elem = document.getElementById("animate3");
-	let size = 50;
-	setInterval(() => {
-		size = (size === 50) ? 100 : 50;
-		elem.style.width = size + "px";
-		elem.style.height = size + "px";
-	}, 1000);
-}
+        function multiplication() {
+            document.getElementById("demo").innerHTML = 6 * 5;
+        }
 
-function moveFunk (e){
-	let x = e.clientX;
-	let y = e.clientY;
-	let coor ="Coordinates: (" +x+", "+y+")";
-	document.getElementById("demo").innerHTML= coor;
-}
+        function division() {
+            document.getElementById("demo").innerHTML = 6 / 5;
+        }
 
-function clearCoor(){
-	document.getElementById("demo").innerHTML = "";
-}
+        function helloworld() {
+            document.getElementById("demo").innerHTML = "Greetings Everyone!";
+        }
 
-function addition(){
-	document.getElementById("demo").innerHTML = 6 + 5;
-}
-
-function subtraction(){
-	document.getElementById("demo").innerHTML = 6 - 5;
-}
-
-function multiplication(){
-	document.getElementById("demo").innerHTML = 6 * 5;
-}
-
-function division(){
-	document.getElementById("demo").innerHTML = 6 / 5;
-}
-
-function helloworld(){
-	document.getElementById("demo").innerHTML = "Greetings Everyone!";
-}
-
-</script>
-
-</center>
+        function toggleFade() {
+            const container = document.querySelector('.container');
+            container.classList.toggle('fadeOut');
+            container.classList.toggle('fadeIn');
+        }
+    </script>
 </body>
 </html>
